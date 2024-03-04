@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+autonumber
+participant "RatingMovieActivity" as Activity
+participant "MovieListViewModel" as ViewModel
+participant "MovieRepository" as Repository
+participant "SessionRepository" as Repository1
+participant "MovieApiClient" as Request
+participant "SessionApiClient" as Request1
+participant Servicey
+
+
+
+
+
+Activity -> ViewModel: rateMovieApi(request,id,rating)
+ViewModel -> Repository1: getSessionId();
+Repository1 -> Request1: getSessionId();
+Request1 --> Repository1: sessionId
+Repository1 --> ViewModel:sessionId
+ViewModel -> Repository: rateMovieApi(request,id, sessionId, rating)
+Repository -> Request:rateMovieApi(request,id, sessionId, rating)
+Request -> Servicey: getMovieRating(id, sessionId, rating)
+
+
+Servicey -> Servicey:  POST "/3/movie/{movie_id}/rating"
+Servicey --> Servicey: response
+Servicey --> Request: response
+
+
+
+
+Request --> Repository:
+Repository --> ViewModel:
+ViewModel --> Activity:
+
+
+@enduml

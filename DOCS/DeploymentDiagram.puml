@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/deployment-diagram
+ left to right direction
+
+node "Android/IOS Device" as one {
+
+component "Movie App"
+
+}
+
+
+node Server{
+
+component "TMDB API"
+
+}
+
+one -- Server: HTTP
+
+@enduml

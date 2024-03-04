@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+
+rectangle "Movie App Client"{
+
+component Screens
+component Service
+component Context
+component Components
+component Assets
+circle " "
+circle "  "
+circle "   "
+circle "    "
+}
+circle "     "
+
+Context -down-( " "
+" " -down- Service
+
+Screens -left-( "  "
+"  " -left- Components
+
+Screens -right-( "   "
+"   " -right- Context
+
+Components -down-( "    "
+"    " -down- Assets
+
+Service -right-( "     "
+
+@enduml

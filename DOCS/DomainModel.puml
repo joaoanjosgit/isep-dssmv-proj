@@ -1,0 +1,54 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+left to right direction
+hide circles
+
+class Movie {
+Title
+Poster Image
+Vote Average
+Release Date
+Runtime
+Status
+Language
+Overview
+
+}
+
+
+
+class TVShows {
+Name
+Poster Image
+Vote Average
+Air Date
+Seasons Number
+Status
+Language
+Overview
+}
+
+class Rating {
+Value
+}
+
+class App{
+Name
+}
+
+
+
+Movie "1" -down- "1" Rating : has >
+
+TVShows "1" -down- "1" Rating : has >
+
+
+
+
+TVShows "1..*" -up- "1" App : contains <
+Movie "1..*" -up- "   1" App : contains <
+
+
+
+@enduml

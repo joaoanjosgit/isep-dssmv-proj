@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide circles
+
+class WatchListPage
+class MovieDeleteRatingPage
+class TvShowsDeleteRatingPage
+
+WatchListPage o-- MovieDeleteRatingPage
+WatchListPage o-- TvShowsDeleteRatingPage
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide circles
+
+class MovieError
+class MovieHeader
+class MovieList
+class MovieLoading
+class MoviesFavoritesList
+class TvShowsFavoritesList
+class TvShowsList
+class MoviesWatchList
+class TvShowsWatchList
+
+@enduml

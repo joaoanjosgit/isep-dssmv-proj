@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+autonumber
+participant "DetailRatingMovieActivity" as Activity
+participant "MovieListViewModel" as ViewModel
+participant "MovieRepository" as Repository
+participant "SessionRepository" as Repository1
+participant "MovieApiClient" as Request
+participant "SessionApiClient" as Request1
+participant Servicey
+
+
+
+
+
+Activity -> ViewModel: deleteMovieApi(request,id)
+ViewModel -> Repository1: getSessionId();
+Repository1 -> Request1: getSessionId();
+Request1 --> Repository1: sessionId
+Repository1 --> ViewModel:sessionId
+ViewModel -> Repository: deleteMovieApi(request,id, sessionId,)
+Repository -> Request:deleteMovieApi(request,id, sessionId)
+Request -> Servicey: getMovieDelete(id, sessionId)
+
+
+Servicey -> Servicey:  DELETE "/3/movie/{movie_id}/rating"
+Servicey --> Servicey: response
+Servicey --> Request: response
+
+
+
+
+Request --> Repository:
+Repository --> ViewModel:
+ViewModel --> Activity:
+
+
+
+@enduml

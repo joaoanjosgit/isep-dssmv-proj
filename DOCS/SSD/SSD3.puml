@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor User
+
+User -> System: Request to give a rating
+System --> User: Ask for a value
+User -> System: Enters value
+User -> System: Saves value
+System -> System: Validates value
+
+alt
+
+System -> System: Stores value
+System --> User: return success
+
+else
+
+System --> User: return failure
+
+end alt
+
+@enduml

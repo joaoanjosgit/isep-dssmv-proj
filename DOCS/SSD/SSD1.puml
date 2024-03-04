@@ -1,0 +1,11 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor User
+
+
+User -> System: Select movies tab
+System --> User: List of popular movies
+
+@enduml

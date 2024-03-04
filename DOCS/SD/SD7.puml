@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+autonumber
+participant "RatedItemsFragment" as Fragment
+participant "MovieListViewModel" as ViewModel
+participant "MovieRepository" as Repository
+
+
+Fragment -> ViewModel: getWatchList()
+ViewModel -> Repository:getWatchList()
+Repository --> ViewModel: movieList
+ViewModel --> Fragment: movieList
+Fragment -> Adapter: setModelList(list)
+Adapter -> Adapter: notifyDataSetChanged()
+Adapter --> Adapter:
+Adapter --> Fragment:
+
+
+@enduml

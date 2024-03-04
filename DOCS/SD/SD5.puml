@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+autonumber
+participant "DetailMovieActivity" as Activity
+participant "MovieListViewModel" as ViewModel
+participant "MovieRepository" as Repository
+
+
+
+
+Activity -> ViewModel: exists = verifyWatchList(id)
+ViewModel -> Repository: verifyWatchList(id)
+Repository --> ViewModel:boolean
+ViewModel --> Activity:boolean
+
+alt exists = true
+
+Activity -> Activity: exists= false
+Activity --> Activity: exists
+Activity -> ViewModel:removewatchList(id)
+ViewModel -> Repository: removeMovie(id)
+Repository -> Repository:movieList.postValue(list)
+Repository --> Repository: movieList
+else exists = false
+Activity -> ViewModel:watchList(id)
+ViewModel -> Repository: addMovie(id)
+Repository -> Repository:movieList.postValue(list)
+Repository --> Repository: movieList
+
+
+end alt
+
+
+Repository --> ViewModel:
+ViewModel --> Activity:
+
+
+@enduml

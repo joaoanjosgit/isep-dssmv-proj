@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide circles
+
+class Action
+class AppContext
+class AppProvider
+class Reducer
+
+Action -up-o Reducer
+Reducer -up-o AppProvider
+
+@enduml

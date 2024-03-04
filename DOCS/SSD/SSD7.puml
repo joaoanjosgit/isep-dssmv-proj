@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor User
+
+User -> System: Select watch list tab
+System --> User: return watch list
+
+@enduml

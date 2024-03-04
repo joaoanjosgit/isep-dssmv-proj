@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+autonumber
+participant "SearchActivity" as Activity
+participant "MultiListViewModel" as ViewModel
+participant "MultiRepository" as Repository
+participant "MultiApiClient" as Request
+participant Servicey
+participant "MultiResponse" as Response
+participant "MultiSearchRecyclerView" as Adapter
+
+
+
+Activity -> ViewModel: multiSearchApi(request, query, page)
+ViewModel -> Repository: multiSearchApi(request, query, page)
+Repository -> Request:multiSearchApi(request, query, page)
+Request -> Servicey: getMulti(query, page)
+
+Servicey -> Servicey:  GET "/3/search/multi"
+Servicey --> Servicey: response
+Servicey --> Request: response
+
+
+alt On Response
+
+    loop
+
+Request -> Response: Multi aux = getMultiModel();
+Response --> Request: multiModel
+
+Request -> Request: list.add(aux)
+Request --> Request: list
+end loop
+
+Request -> Request: multiList.postValue(list)
+Request --> Request: multiList
+
+else On Failure
+
+Request -> Request: multiList.postValue(null)
+Request --> Request: multiList
+
+end alt
+
+Request --> Repository:
+Repository --> ViewModel:
+ViewModel --> Activity:
+
+Activity -> ViewModel: getMulti()
+ViewModel -> Repository: getMulti()
+Repository -> Request: getMultiResponse()
+Request --> Repository: multiList
+Repository --> ViewModel: multiList
+ViewModel --> Activity: multiList
+
+Activity -> Adapter: setModelList(list)
+Adapter -> Adapter: notifyDataSetChanged()
+Adapter --> Adapter:
+Adapter --> Activity:
+
+@enduml

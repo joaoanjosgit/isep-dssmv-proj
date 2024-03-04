@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor User
+
+User --> System: Request to search for movies and shows
+System --> User: Asks for name/title
+User -> System: Enters value
+User -> System: Saves value
+System --> User: return list of movies and shows
+
+
+
+@enduml

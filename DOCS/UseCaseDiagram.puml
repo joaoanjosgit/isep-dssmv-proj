@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+left to right direction
+
+rectangle MovieApp{
+    usecase "UC1/2 - Get Popular Movies/TV Shows" as UC1
+    usecase "UC3 - Get Top Rated Movies " as UC2
+    usecase "UC4 - Get On Air TV Shows" as UC3
+    usecase "UC5/6 - Get Movies/TV Show Details" as UC4
+    usecase "UC7/8 - Post a Rating to Movie/TV Show" as UC5
+    usecase "UC9/10 - Delete a Rating associated to a Movie/TV Show" as UC6
+    usecase "UC11/12 - Add Movie/TV Shows to Watch List" as UC7
+    usecase "UC13/14 - Remove Movie/TV Show from Watch List" as UC8
+    usecase "UC15/16 - Shows watch list" as UC9
+    usecase "UC17/18 - Get list of Rated Movies/TV Shows" as UC10
+}
+
+User -- UC1
+User ----- UC2
+User -- UC3
+User -- UC4
+User -- UC5
+User -- UC6
+User -- UC7
+User -- UC8
+User -- UC9
+User -- UC10
+
+@enduml

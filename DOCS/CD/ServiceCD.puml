@@ -1,0 +1,8 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide circles
+
+class Service
+
+
+@enduml

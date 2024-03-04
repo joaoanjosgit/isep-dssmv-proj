@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor User
+
+User --> System: Request details of a movie
+System --> User: Shows movie details
+
+
+
+@enduml

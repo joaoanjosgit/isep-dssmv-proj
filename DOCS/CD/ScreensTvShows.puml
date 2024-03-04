@@ -1,0 +1,12 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide circles
+
+class TvShowsPage
+class TvShowsDetailsPage
+class TvShowsRatingPage
+
+TvShowsRatingPage -up-o TvShowsDetailsPage
+TvShowsPage o-down- TvShowsDetailsPage
+@enduml

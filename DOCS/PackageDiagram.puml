@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+allowmixing
+hide circles
+
+package "dssmv_ProjectReact_1201128_1201132"{
+
+class App {
+}
+
+folder screens
+folder service
+folder context
+folder components
+folder assets
+
+}
+
+App .right.> screens
+screens .down.> components
+context .right.> service
+screens .> context
+components .> assets
+
+
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+actor User
+
+User --> System: Request to add movie to watch list
+System -> System: add object to list
+System --> User: return success
+
+@enduml

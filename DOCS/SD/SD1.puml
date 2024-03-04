@@ -1,0 +1,59 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+autonumber
+participant "MovieFragment" as Fragment
+participant "MovieListViewModel" as ViewModel
+participant "MovieRepository" as Repository
+participant "MovieApiClient" as Request
+participant Servicey
+participant "MovieResponse" as Response
+
+participant "MovieRecyclerView" as Adapter
+
+
+
+Fragment -> ViewModel: moviePopularApi(request,page)
+ViewModel -> Repository: moviePopularApi(request, page)
+Repository -> Request:moviePopularApi(request, page)
+Request -> Servicey: getPopularMovies(page)
+
+Servicey -> Servicey:  GET "/3/movie/popular"
+Servicey --> Servicey: response
+Servicey --> Request: response
+
+
+alt On Response
+
+Request -> Response: getMovieModel();
+Response --> Request: list
+Request -> Request: popularMovies.postValue(list)
+Request --> Request: popularMovies
+
+else On Failure
+
+Request -> Request: popularMovies.postValue(null)
+Request --> Request: popularMovies
+
+end alt
+
+Request --> Repository:
+Repository --> ViewModel:
+ViewModel --> Fragment:
+
+Fragment -> ViewModel: getMoviesPopular()
+ViewModel -> Repository: getMoviesPopular()
+Repository -> Request: getMoviesPopular()
+Request --> Repository: popularMovies
+Repository --> ViewModel: popularMovies
+ViewModel --> Fragment: popularMovies
+
+
+Fragment -> Adapter: setModelList(list)
+Adapter -> Adapter: notifyDataSetChanged()
+Adapter --> Adapter:
+Adapter --> Fragment:
+
+
+@enduml

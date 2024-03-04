@@ -1,0 +1,76 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autoactivate on
+autonumber
+participant "DetailMovieActivity" as Activity
+participant "MovieListViewModel" as ViewModel
+participant "MovieRepository" as Repository
+participant "MovieApiClient" as Request
+participant Servicey
+participant "DetailMovieResponse" as Response
+participant Movie
+
+
+
+
+Activity -> ViewModel: movieDetailApi(request,id)
+ViewModel -> Repository: movieDetailApi(request, id)
+Repository -> Request:movieDetailApi(request, id)
+Request -> Servicey: getMovieDetail(id)
+
+Servicey -> Servicey:  GET "/3/movie/{movie_id}"
+Servicey --> Servicey: response
+Servicey --> Request: response
+
+
+alt On Response
+
+Request -> Response: getBackdrop_path();
+Response --> Request: backdrop_path
+Request -> Response: getId();
+Response --> Request: id
+Request -> Response: getOverview();
+Response --> Request: overview
+Request -> Response: getPoster_path();
+Response --> Request: poster_path
+Request -> Response: getRelease_date();
+Response --> Request: release_date
+Request -> Response: getRuntime();
+Response --> Request: runtime
+Request -> Response: getStatus();
+Response --> Request: status
+Request -> Response: getTitle();
+Response --> Request: title
+Request -> Response: getVote_average();
+Response --> Request: vote_average
+Request -> Response: getVote_count();
+Response --> Request: vote_count
+Request -> Response: getGenres();
+Response --> Request: genres
+Request -> Movie: Movie movie = new Movie(backdrop_path, genres, id, overview, runtime, poster_path, status, release_date, title, vote_average, vote_count);
+Movie --> Request: movie
+Request -> Request: detailMovie.postValue(movie)
+Request --> Request: detailMovie
+
+else On Failure
+
+Request -> Request: detailMovie.postValue(null)
+Request --> Request: detailMovie
+
+end alt
+
+Request --> Repository:
+Repository --> ViewModel:
+ViewModel --> Activity:
+
+Activity -> ViewModel: getMoviesDetail()
+ViewModel -> Repository: getMoviesDetail()
+Repository -> Request: getMovieDetail()
+Request --> Repository: detailMovie
+Repository --> ViewModel: detailMovie
+ViewModel --> Activity: detailMovie
+
+
+
+@enduml
